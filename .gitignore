@@ -1,20 +1,20 @@
 # Huge raw data archives (all 2,819 fires are already ingested in backend/fire_intelligence.db)
-brazil/
-canada/
+/brazil/
+/canada/
 *.csv
 *.mp4
 
 # Auxiliary standalone prototype folders (already integrated into the main app)
-fire-detection-/
-fire-risk/
-wildfire-analytics-/
-user/
-ALert/
--evacuation-center/
-infrastructure-exposure-intelligence/
-smoke/
-weather/
-ground truth/
+/fire-detection-/
+/fire-risk/
+/wildfire-analytics-/
+/user/
+/ALert/
+/-evacuation-center/
+/infrastructure-exposure-intelligence/
+/smoke/
+/weather/
+/ground truth/
 
 # Root boilerplate files (the real app is in 'Recreate Dark Enterprise Dashboard' and 'backend')
 /.aistudio/

@@ -2,7 +2,12 @@
 /brazil/
 /canada/
 *.csv
-*.mp4
+/video1.mp4
+/viirs-jpss1_2024_Egypt.csv
+
+# Keep essential video assets
+!Recreate Dark Enterprise Dashboard/src/assets/video1.mp4
+!Recreate Dark Enterprise Dashboard/public/video1.mp4
 
 # Auxiliary standalone prototype folders (already integrated into the main app)
 /fire-detection-/

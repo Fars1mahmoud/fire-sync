@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fire sync — NASA Space Apps Challenge 2026 Pitch Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #030712;
+      color: #f3f4f6;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      user-select: none;
+    }
+    .deck-container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slide {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      padding: 3.5rem 5rem;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+      transform: scale(0.98);
+      background: radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.08) 0%, rgba(3, 7, 18, 0.98) 70%),
+                  radial-gradient(circle at 20% 80%, rgba(249, 115, 22, 0.05) 0%, rgba(3, 7, 18, 0.98) 70%),
+                  #030712;
+    }
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      transform: scale(1);
+    }
+    /* Header bar */
+    .slide-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 1rem;
+    }
+    .nasa-brand {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .space-apps-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      color: #38bdf8;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .nasa-meatball {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      background: radial-gradient(circle, #0b3d91 60%, #fc3d21 100%);
+      border-radius: 50%;
+      color: white;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      box-shadow: 0 0 15px rgba(11, 61, 145, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    .team-badge {
+      background: rgba(14, 165, 233, 0.12);
+      border: 1px solid rgba(14, 165, 233, 0.4);
+      color: #38bdf8;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      letter-spacing: 0.5px;
+    }
+    .slide-number {
+      font-family: 'Orbitron', sans-serif;
+      color: #6b7280;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    /* Content Area */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+    .slide-title-group {
+      margin-bottom: 1.5rem;
+    }
+    .challenge-tag {
+      display: inline-block;
+      color: #f97316;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .slide-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+    .slide-subtitle {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      margin-top: 0.35rem;
+      font-weight: 400;
+    }
+
+    /* Grid layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: stretch;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #38bdf8, #f97316);
+      opacity: 0.6;
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card-text {
+      font-size: 0.92rem;
+      color: #94a3b8;
+      line-height: 1.55;
+    }
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .bullet-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+    .bullet-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background-color: #38bdf8;
+      border-radius: 50%;
+      margin-top: 0.5rem;
+      flex-shrink: 0;
+    }
+    .bullet-dot.orange {
+      background-color: #f97316;
+    }
+    .bullet-dot.green {
+      background-color: #10b981;
+    }
+
+    /* Stats pill */
+    .stat-box {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(14, 165, 233, 0.25);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      text-align: center;
+    }
+    .stat-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #38bdf8;
+      letter-spacing: -0.5px;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #94a3b8;
+      margin-top: 0.25rem;
+    }
+
+    /* Slide 1 Hero */
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4.2rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, #ffffff 30%, #38bdf8 70%, #f97316 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .hero-subtitle {
+      font-size: 1.35rem;
+      color: #94a3b8;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      margin-bottom: 2rem;
+      max-width: 800px;
+    }
+    .team-showcase {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 1.25rem;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      max-width: 950px;
+    }
+    .team-name-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 0.75rem;
+    }
+    .team-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      color: #f97316;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.85rem;
+    }
+    .member-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(30, 41, 59, 0.6);
+      padding: 0.6rem 0.9rem;
+      border-radius: 0.6rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.92rem;
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+    .member-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0284c7, #f97316);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    /* Footer & Controls */
+    .slide-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1rem;
+    }
+    .footer-left {
+      font-size: 0.8rem;
+      color: #64748b;
+      letter-spacing: 0.5px;
+    }
+    .footer-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .nav-btn {
+      background: rgba(30, 41, 59, 0.8);
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 0.4rem 0.9rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      background: #0284c7;
+      border-color: #38bdf8;
+    }
+    .dots-indicator {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .dot.active {
+      background: #38bdf8;
+      width: 22px;
+      border-radius: 4px;
+    }
+
+    /* Print styling for PDF export */
+    @media print {
+      body {
+        overflow: visible;
+        background: black;
+      }
+      .slide {
+        display: flex !important;
+        opacity: 1 !important;
+        transform: none !important;
+        page-break-after: always;
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+      }
+      .footer-controls {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="deck-container">
+
+  <!-- ==================== SLIDE 1: INTRODUCTION ==================== -->
+  <section class="slide active" id="slide-1">
+    <div class="slide-header">
+      <div class="nasa-brand">
+        <div class="nasa-meatball">NASA</div>
+        <div class="space-apps-badge">Space Apps Challenge 2026</div>
+      </div>
+      <div class="team-badge">Team: Cloud Masters</div>
+      <div class="slide-number">01 / 07</div>
+    </div>
+
+    <div class="slide-body" style="justify-content: center;">
+      <span class="challenge-tag">Earth Observation & Wildfire Response Challenge</span>
+      <h1 class="hero-title">FIRE SYNC</h1>
+      <p class="hero-subtitle">NASA Earth Wildfire Intelligence & Emergency Evacuation System</p>
+
+      <div class="team-showcase">
+        <div class="team-name-header">
+          <div class="team-title">⚡ Cloud Masters Team</div>
+          <span style="font-size: 0.8rem; color: #94a3b8;">Universal Event Participation</span>
+        </div>
+        <div class="members-grid">
+          <div class="member-pill"><span class="member-avatar">FM</span> Fares Mahmoud</div>
+          <div class="member-pill"><span class="member-avatar">MS</span> Malak Saeed</div>
+          <div class="member-pill"><span class="member-avatar">YR</span> Youssef Reda</div>
+          <div class="member-pill"><span class="member-avatar">MG</span> Mariam Gamal</div>
+          <div class="member-pill"><span class="member-avatar">MA</span> Mohamed Ayman</div>
+          <div class="member-pill"><span class="member-avatar">MS</span> Manar Saeed</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="footer-left">Use Arrow Keys [ ← / → ] to navigate | Press [F] for Fullscreen | [P] to Print PDF</div>
+      <div class="footer-controls">
+        <div class="dots-indicator" id="dots"></div>
+        <button class="nav-btn" onclick="prevSlide()">Prev</button>
+        <button class="nav-btn" onclick="nextSlide()">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 2: THE PROBLEM ==================== -->
+  <section class="slide" id="slide-2">
+    <div class="slide-header">
+      <div class="nasa-brand">
+        <div class="nasa-meatball">NASA</div>
+        <div class="space-apps-badge">The Challenge</div>
+      </div>
+      <div class="team-badge">Cloud Masters</div>
+      <div class="slide-number">02 / 07</div>
+    </div>
+
+    <div class="slide-body">
+      <div class="slide-title-group">
+        <span class="challenge-tag">Problem Formulation</span>
+        <h2 class="slide-title">The Wildfire Escalation & Information Gap</h2>
+        <p class="slide-subtitle">Disaster response is failing not from a lack of satellites, but from fragmented space-to-ground communication.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div>
+            <div class="card-title">🔥 Wildfire Surge</div>
+            <p class="card-text">Mega-fires in the Amazon Basin, Canadian Boreal Forests, and the Mediterranean are increasing exponentially, overwhelming traditional surveillance.</p>
+          </div>
+          <div class="stat-box" style="margin-top: 1rem;">
+            <div class="stat-number">+98%</div>
+            <div class="stat-label">Surge Over Baseline</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-title">🛰️ Disparate Telemetry</div>
+            <p class="card-text">NASA satellites (MODIS 1km vs VIIRS 375m) operate on varying orbits with raw data streams that ground commanders cannot readily interpret under pressure.</p>
+          </div>
+          <div class="stat-box" style="margin-top: 1rem;">
+            <div class="stat-number">Hours</div>
+            <div class="stat-label">Critical Data Latency</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-title">👥 Trapped Communities</div>
+            <p class="card-text">Endangered civilians and medical convoys lack real-time evacuation pathing, often fleeing straight into active flame fronts and toxic PM2.5 smoke plumes.</p>
+          </div>
+          <div class="stat-box" style="margin-top: 1rem;">
+            <div class="stat-number">3.9M</div>
+            <div class="stat-label">Populations at Risk</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="footer-left">Slide 2: Problem Statement & Beneficiary Analysis</div>
+      <div class="footer-controls">
+        <button class="nav-btn" onclick="prevSlide()">Prev</button>
+        <button class="nav-btn" onclick="nextSlide()">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 3: THE SOLUTION ==================== -->
+  <section class="slide" id="slide-3">
+    <div class="slide-header">
+      <div class="nasa-brand">
+        <div class="nasa-meatball">NASA</div>
+        <div class="space-apps-badge">The Solution</div>
+      </div>
+      <div class="team-badge">Cloud Masters</div>
+      <div class="slide-number">03 / 07</div>
+    </div>
+
+    <div class="slide-body">
+      <div class="slide-title-group">
+        <span class="challenge-tag">Our Innovation</span>
+        <h2 class="slide-title">Fire sync: Autonomous Planetary Intelligence</h2>
+        <p class="slide-subtitle">Harmonizing multi-sensor NASA Earth observations into life-saving ground decisions in under 5 seconds.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">🛡️ Tactical Command Hub (Responders)</div>
+          <ul class="bullet-list">
+            <li><span class="bullet-dot"></span><b>Multi-Sensor GIS:</b> Unifies MODIS (1km) & VIIRS (375m) thermal radiometric footprints.</li>
+            <li><span class="bullet-dot"></span><b>Satellite Overpass Ticker:</b> Predicts the exact minutes until the next orbital reconnaissance window.</li>
+            <li><span class="bullet-dot"></span><b>Atmospheric Vector Radar:</b> Live MERRA-2 and GOES-16 wind speeds, gusts, and KBDI drought indices.</li>
+            <li><span class="bullet-dot"></span><b>Ground Truth Verification:</b> Drone and ranger photo feeds that eliminate false thermal positives.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">👤 Civilian Safety Portal (Communities)</div>
+          <ul class="bullet-list">
+            <li><span class="bullet-dot orange"></span><b>Panic-Free Interface:</b> Strips away technical jargon to present actionable, immediate safety status.</li>
+            <li><span class="bullet-dot orange"></span><b>Local Air Quality Alerts:</b> Sentinel-5P aerosol indexing and PM2.5 respiratory warnings.</li>
+            <li><span class="bullet-dot orange"></span><b>Safe Evacuation Corridors:</b> Dynamic routing steering citizens away from flame fronts to emergency shelters.</li>
+            <li><span class="bullet-dot orange"></span><b>Offline-First Resilience:</b> Embedded dataset caching ensuring the platform never fails during network outages.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="footer-left">Slide 3: Solution Architecture & Dual-Role Interface</div>
+      <div class="footer-controls">
+        <button class="nav-btn" onclick="prevSlide()">Prev</button>
+        <button class="nav-btn" onclick="nextSlide()">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 4: HOW IT WORKS ==================== -->
+  <section class="slide" id="slide-4">
+    <div class="slide-header">
+      <div class="nasa-brand">
+        <div class="nasa-meatball">NASA</div>
+        <div class="space-apps-badge">Workflow</div>
+      </div>
+      <div class="team-badge">Cloud Masters</div>
+      <div class="slide-number">04 / 07</div>
+    </div>
+
+    <div class="slide-body">
+      <div class="slide-title-group">
+        <span class="challenge-tag">Operational Pipeline</span>
+        <h2 class="slide-title">End-to-End Autonomous Workflow</h2>
+        <p class="slide-subtitle">From raw satellite radiative power to coordinated emergency convoy dispatch.</p>
+      </div>
+
+      <div class="grid-4">
+        <div class="card">
+          <div>
+            <div class="card-title" style="color: #38bdf8;">01. Ingest & Sync</div>
+            <p class="card-text">Captures thermal anomalies from VIIRS (375m) & MODIS (1km); processes 2,819+ active detections through our spatial database engine.</p>
+          </div>
+          <div style="font-size: 0.75rem; color: #64748b; margin-top: 1rem;">NASA FIRMS API</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-title" style="color: #f97316;">02. AI Modeling</div>
+            <p class="card-text">Synthesizes live atmospheric vectors (wind speed, direction, KBDI drought) to project 24h–72h fire propagation and smoke plumes.</p>
+          </div>
+          <div style="font-size: 0.75rem; color: #64748b; margin-top: 1rem;">MERRA-2 & Scikit-Learn</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-title" style="color: #eab308;">03. Buffer Assets</div>
+            <p class="card-text">Calculates real-time geodesic proximity buffers around critical hospitals, high-voltage power grids, and water reservoirs.</p>
+          </div>
+          <div style="font-size: 0.75rem; color: #64748b; margin-top: 1rem;">Geodesic Spatial Engine</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-title" style="color: #10b981;">04. Safe Evacuation</div>
+            <p class="card-text">AI routing flags blocked highways, identifies open corridors, and issues turn-by-turn directions to emergency staging hubs.</p>
+          </div>
+          <div style="font-size: 0.75rem; color: #64748b; margin-top: 1rem;">Automated Dispatch</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="footer-left">Slide 4: Technical Pipeline & Real-Time Action Steps</div>
+      <div class="footer-controls">
+        <button class="nav-btn" onclick="prevSlide()">Prev</button>
+        <button class="nav-btn" onclick="nextSlide()">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 5: NASA DATA ==================== -->
+  <section class="slide" id="slide-5">
+    <div class="slide-header">
+      <div class="nasa-brand">
+        <div class="nasa-meatball">NASA</div>
+        <div class="space-apps-badge">Data Architecture</div>
+      </div>
+      <div class="team-badge">Cloud Masters</div>
+      <div class="slide-number">05 / 07</div>
+    </div>
+
+    <div class="slide-body">
+      <div class="slide-title-group">
+        <span class="challenge-tag">Space-Based Telemetry</span>
+        <h2 class="slide-title">NASA Data Assets & Partner Missions</h2>
+        <p class="slide-subtitle">Multi-mission fusion providing continuous spatial, temporal, and spectral coverage.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">🇺🇸 NASA Primary Space Assets</div>
+          <ul class="bullet-list">
+            <li><span class="bullet-dot"></span><b>NASA FIRMS (VIIRS 375m I-Band):</b> Flown on Suomi-NPP & NOAA-20/21 for high-resolution fire perimeters.</li>
+            <li><span class="bullet-dot"></span><b>NASA FIRMS (MODIS 1km Thermal):</b> Flown on Terra & Aqua for broad thermal anomalies & radiative power (FRP).</li>
+            <li><span class="bullet-dot"></span><b>NASA POWER & MERRA-2:</b> Climatological surface wind velocities, relative humidity, and solar radiance telemetry.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🇪🇺 Space Agency Partners & In-Situ Data</div>
+          <ul class="bullet-list">
+            <li><span class="bullet-dot green"></span><b>ESA Sentinel-2 (MSI 10m):</b> Multi-spectral NDVI vegetative monitoring & post-fire burn scar rehabilitation.</li>
+            <li><span class="bullet-dot green"></span><b>ESA Sentinel-5P (TROPOMI):</b> Atmospheric NO2 and aerosol smoke index for downwind health advisories.</li>
+            <li><span class="bullet-dot green"></span><b>Open-Meteo & OpenStreetMap:</b> Real-time localized weather telemetry and civil infrastructure layers.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="footer-left">Slide 5: NASA & Partner Missions Integration</div>
+      <div class="footer-controls">
+        <button class="nav-btn" onclick="prevSlide()">Prev</button>
+        <button class="nav-btn" onclick="nextSlide()">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 6: PROGRESS & VALIDATION ==================== -->
+  <section class="slide" id="slide-6">
+    <div class="slide-header">
+      <div class="nasa-brand">
+        <div class="nasa-meatball">NASA</div>
+        <div class="space-apps-badge">Validation</div>
+      </div>
+      <div class="team-badge">Cloud Masters</div>
+      <div class="slide-number">06 / 07</div>
+    </div>
+
+    <div class="slide-body">
+      <div class="slide-title-group">
+        <span class="challenge-tag">Implementation Status</span>
+        <h2 class="slide-title">Validated Execution Across 3 Global Biomes</h2>
+        <p class="slide-subtitle">Not a mock-up — a fully engineered, deployed platform proven across three distinct ecosystems.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title">🇧🇷 Amazon Basin (Brazil)</div>
+          <p class="card-text"><b>7.69M Archive Telemetry:</b> Validated against tropical deforestation fronts, dense canopies, and persistent smoke haze corridors.</p>
+          <div class="stat-box" style="margin-top: 1rem;">
+            <div class="stat-number">7.69M</div>
+            <div class="stat-label">Telemetry Ingested</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🇨🇦 Boreal Belt (Canada)</div>
+          <p class="card-text"><b>3.18M Records & Active Belt:</b> Tested on massive lightning-triggered mega-fires, high wind advection, and long-range evacuation routes.</p>
+          <div class="stat-box" style="margin-top: 1rem;">
+            <div class="stat-number">284K ha</div>
+            <div class="stat-label">Burn Area Analyzed</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🇪🇬 Nile Corridor (Egypt)</div>
+          <p class="card-text"><b>Arid & Agricultural Matrix:</b> Demonstrates sensitivity to agricultural residue burning and extreme arid heat anomaly detection.</p>
+          <div class="stat-box" style="margin-top: 1rem;">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Ground Validation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="footer-left">Slide 6: Multi-Biome Validation & Empirical Proof</div>
+      <div class="footer-controls">
+        <button class="nav-btn" onclick="prevSlide()">Prev</button>
+        <button class="nav-btn" onclick="nextSlide()">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 7: VALUE & NEXT STEPS ==================== -->
+  <section class="slide" id="slide-7">
+    <div class="slide-header">
+      <div class="nasa-brand">
+        <div class="nasa-meatball">NASA</div>
+        <div class="space-apps-badge">Impact & Roadmap</div>
+      </div>
+      <div class="team-badge">Cloud Masters</div>
+      <div class="slide-number">07 / 07</div>
+    </div>
+
+    <div class="slide-body">
+      <div class="slide-title-group">
+        <span class="challenge-tag">Humanitarian Value & Future Horizon</span>
+        <h2 class="slide-title">Turning Space Science into Saved Lives</h2>
+        <p class="slide-subtitle">Delivering immediate life-saving impact today, with a clear roadmap for planetary resilience tomorrow.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">🌍 Immediate Humanitarian Impact</div>
+          <ul class="bullet-list">
+            <li><span class="bullet-dot green"></span><b>Sub-Minute Response:</b> Decreases detection-to-evacuation latency from hours to seconds.</li>
+            <li><span class="bullet-dot green"></span><b>Infrastructure Safeguard:</b> Automatically prioritizes hospital and power grid defense.</li>
+            <li><span class="bullet-dot green"></span><b>Zero Civilian Entrapment:</b> Provides real-time turn-by-turn routing around active smoke & flames.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🔭 Future Strategic Roadmap</div>
+          <ul class="bullet-list">
+            <li><span class="bullet-dot"></span><b>IoT Ground Sensor Nodes:</b> Deploying solar-powered acoustic & gas sensors under forest canopies.</li>
+            <li><span class="bullet-dot"></span><b>Autonomous Drone Swarms:</b> Real-time drone dispatch triggered automatically by VIIRS satellite alerts.</li>
+            <li><span class="bullet-dot"></span><b>Offline Mesh Networks:</b> Peer-to-peer mobile routing when cell towers are destroyed by fire.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="footer-left">Slide 7: Value Proposition & Strategic Future Roadmap</div>
+      <div class="footer-controls">
+        <button class="nav-btn" onclick="window.print()">🖨️ Export to PDF</button>
+        <button class="nav-btn" onclick="prevSlide()">Prev</button>
+        <button class="nav-btn" onclick="nextSlide()">Next</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+
+  // Initialize dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = `dot ${i === 0 ? 'active' : ''}`;
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('.dot');
+
+  function updateSlide(index) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = (index + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+
+  function nextSlide() {
+    updateSlide(currentSlide + 1);
+  }
+
+  function prevSlide() {
+    updateSlide(currentSlide - 1);
+  }
+
+  function goToSlide(i) {
+    updateSlide(i);
+  }
+
+  // Keyboard navigation
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+      nextSlide();
+    } else if (e.key === 'ArrowLeft') {
+      prevSlide();
+    } else if (e.key.toLowerCase() === 'f') {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    } else if (e.key.toLowerCase() === 'p') {
+      window.print();
+    }
+  });
+</script>
+
+</body>
+</html>

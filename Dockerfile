@@ -1,7 +1,7 @@
 # ==========================================
 # Stage 1: Build React/Vite Frontend
 # ==========================================
-FROM node:20-alpine AS frontend-builder
+FROM node:20-slim AS frontend-builder
 WORKDIR /app/frontend
 
 COPY ["Recreate Dark Enterprise Dashboard/package.json", "Recreate Dark Enterprise Dashboard/package-lock.json*", "./"]

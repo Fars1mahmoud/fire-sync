@@ -1,0 +1,13 @@
+services:
+  firesync:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fire-sync-app
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - ENVIRONMENT=production
+      - LOG_LEVEL=INFO
+    restart: unless-stopped

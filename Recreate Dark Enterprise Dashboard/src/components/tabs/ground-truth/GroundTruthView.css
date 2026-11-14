@@ -1,0 +1,111 @@
+/* Ground Truth View Tactical HUD Styling */
+
+.ground-truth-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  color: #f1f5f9;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+/* Glassmorphism Tactical Header */
+.gt-header-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(10, 22, 38, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(22, 46, 75, 0.8);
+  border-radius: 16px;
+  padding: 12px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.gt-stat-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(8, 17, 30, 0.8);
+  border: 1px solid rgba(27, 52, 84, 0.7);
+  border-radius: 12px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace, sans-serif;
+}
+
+/* Sector Selector Dropdown */
+.gt-sector-select {
+  appearance: none;
+  background: #081423;
+  color: #e2e8f0;
+  border: 1px solid #1a3352;
+  border-radius: 12px;
+  padding: 8px 32px 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.gt-sector-select:hover,
+.gt-sector-select:focus {
+  border-color: #0070f3;
+  box-shadow: 0 0 12px rgba(0, 112, 243, 0.3);
+}
+
+/* 3-Column Cockpit Layout */
+.gt-layout-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+@media (min-width: 1024px) {
+  .gt-layout-grid {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: calc(100vh - 220px);
+  }
+}
+
+/* Custom Scrollbars */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: rgba(8, 17, 30, 0.5);
+  border-radius: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(30, 58, 95, 0.7);
+  border-radius: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 112, 243, 0.6);
+}
+
+/* Tactical Crosshair Pulse */
+@keyframes radarSweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.radar-sweep {
+  animation: radarSweep 6s linear infinite;
+}
+

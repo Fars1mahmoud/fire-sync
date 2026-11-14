@@ -1,0 +1,568 @@
+/* ==========================================================================
+   Historical Analysis Dashboard Page Styles (FireBoard)
+   Matching 100% exact design and layout from reference screenshot:
+   "3. Historical Analysis"
+   ========================================================================== */
+
+.hist-page-root {
+  min-height: 100vh;
+  width: 100%;
+  background: #060b13;
+  color: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px 28px 24px;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  user-select: none;
+}
+
+/* Page Top Header */
+.hist-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.hist-page-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hist-back-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #0d1e34;
+  border: 1px solid #1f3f6b;
+  color: #38bdf8;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hist-back-nav-btn:hover {
+  background: #0084ff;
+  color: #ffffff;
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(0, 132, 255, 0.4);
+}
+
+/* Main FireBoard Card Container */
+.hist-fireboard-card {
+  background: #070e1a;
+  border: 1px solid #14233c;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Navbar inside FireBoard */
+.fb-top-navbar {
+  background: #0b1424;
+  border-bottom: 1px solid #162744;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #94a3b8;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.fb-brand-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.fb-logo-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.35);
+}
+
+.fb-brand-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.fb-details-crumb {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #64748b;
+  font-size: 11px;
+  font-family: monospace;
+}
+
+/* Nav tabs */
+.fb-nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.fb-nav-tab {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 5px 9px;
+  color: #94a3b8;
+  font-size: 11.5px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.fb-nav-tab:hover {
+  color: #e2e8f0;
+}
+
+.fb-nav-tab.active {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.fb-nav-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 6px;
+  right: 6px;
+  height: 2px;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  border-radius: 1px;
+}
+
+/* Right Nav Controls */
+.fb-right-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11.5px;
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.fb-control-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.fb-control-item:hover {
+  color: #ffffff;
+}
+
+/* Sub-header Filter Bar */
+.fb-filter-bar {
+  background: #08101d;
+  border-bottom: 1px solid #13223a;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 11.5px;
+}
+
+.fb-filter-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fb-search-box {
+  display: flex;
+  align-items: center;
+  background: #0c1626;
+  border: 1px solid #1b2f4e;
+  border-radius: 8px;
+  padding: 4px 8px;
+  gap: 6px;
+}
+
+.fb-search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f1f5f9;
+  font-size: 11.5px;
+  width: 90px;
+}
+
+.fb-search-input::placeholder {
+  color: #475569;
+}
+
+.fb-tag-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #0f1d33;
+  border: 1px solid #1e365b;
+  color: #cbd5e1;
+  padding: 3px 8px;
+  border-radius: 7px;
+  font-size: 11px;
+}
+
+.fb-dropdown-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #0c1626;
+  border: 1px solid #1b2f4e;
+  color: #cbd5e1;
+  padding: 4px 9px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.fb-dropdown-btn:hover {
+  border-color: #2e578c;
+  color: #ffffff;
+}
+
+/* 5 KPI Metric Summary Cards */
+.fb-metric-cards-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 12px 16px 8px 16px;
+}
+
+@media (max-width: 960px) {
+  .fb-metric-cards-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.fb-metric-card {
+  background: #0c1626;
+  border: 1px solid #172a48;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.15s ease;
+}
+
+.fb-metric-card:hover {
+  border-color: #24416f;
+}
+
+.fb-metric-label {
+  font-size: 11.5px;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.fb-metric-label.orange-label {
+  color: #fb923c;
+  font-weight: 600;
+}
+
+.fb-metric-val {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.fb-metric-val.orange-val {
+  color: #f97316;
+}
+
+/* 4 Quadrants Main Grid */
+.fb-main-grid {
+  padding: 10px 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fb-quadrant-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 1080px) {
+  .fb-quadrant-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Panel Box Container */
+.fb-panel-box {
+  background: #0b1526;
+  border: 1px solid #162744;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.fb-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.fb-panel-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* Quadrant 1 (Yearly Activity) */
+.yearly-content-grid {
+  display: grid;
+  grid-template-columns: 3.5fr 5.5fr 3fr;
+  gap: 10px;
+  min-height: 200px;
+}
+
+@media (max-width: 768px) {
+  .yearly-content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.thermal-wave-box {
+  background: #07101f;
+  border: 1px solid #1b2f4e;
+  border-radius: 10px;
+  padding: 8px;
+  display: flex;
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.thermal-y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 9.5px;
+  font-family: monospace;
+  color: #64748b;
+  padding-right: 6px;
+  border-right: 1px solid #152745;
+}
+
+.thermal-canvas-wrap {
+  flex: 1;
+  position: relative;
+  margin-left: 6px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.mini-sparkline-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #07101f;
+  border: 1px solid #162744;
+  border-radius: 8px;
+  padding: 5px 8px;
+  font-size: 9.5px;
+  font-family: monospace;
+  color: #94a3b8;
+  margin-top: 6px;
+}
+
+/* Satellite Fire Plume View */
+.satellite-plume-box {
+  background: #071120;
+  border: 1px solid #1b2f4e;
+  border-radius: 10px;
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.plume-tabs-strip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+  overflow-x: auto;
+}
+
+.plume-tab-btn {
+  background: #0e1b2f;
+  border: 1px solid transparent;
+  color: #94a3b8;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-size: 9px;
+  font-family: monospace;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.plume-tab-btn.active {
+  background: #183660;
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.4);
+  font-weight: 700;
+}
+
+.plume-thumbs-column {
+  background: #091322;
+  border: 1px solid #162744;
+  border-radius: 10px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.plume-thumb-card {
+  position: relative;
+  height: 42px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #1e3458;
+}
+
+/* Quadrant 2 (Seasonal Pattern) */
+.seasonal-legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+}
+
+.seasonal-chart-container {
+  position: relative;
+  height: 200px;
+  width: 100%;
+}
+
+/* Quadrant 3 (Recovery & Heatmap Matrix) */
+.bottom-left-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.split-satellite-box {
+  position: relative;
+  height: 120px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #1b2f4e;
+  background: #071120;
+}
+
+.heatmap-table-grid {
+  display: grid;
+  grid-template-columns: 8fr 4fr;
+  gap: 10px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .heatmap-table-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.heatmap-cells-container {
+  overflow-x: auto;
+}
+
+.heatmap-tile {
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid;
+  transition: transform 0.15s ease;
+}
+
+.heatmap-tile:hover {
+  transform: scale(1.1);
+  z-index: 5;
+}
+
+/* Quadrant 4 (Historical Records Table) */
+.hist-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.hist-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: monospace;
+}
+
+.hist-data-table tr {
+  border-bottom: 1px solid #132037;
+  transition: background 0.15s ease;
+}
+
+.hist-data-table tr:hover {
+  background: #0e1b30;
+}
+
+.hist-data-table td {
+  padding: 8px 10px;
+  font-size: 13.5px;
+}
+
+.hist-table-val-orange {
+  color: #f97316;
+  font-weight: 700;
+}
+
+.hist-table-val-blue {
+  color: #38bdf8;
+  font-weight: 600;
+}

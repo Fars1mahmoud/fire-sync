@@ -1,0 +1,65 @@
+# Huge raw data archives (all 2,819 fires are already ingested in backend/fire_intelligence.db)
+brazil/
+canada/
+*.csv
+*.mp4
+
+# Auxiliary standalone prototype folders (already integrated into the main app)
+fire-detection-/
+fire-risk/
+wildfire-analytics-/
+user/
+ALert/
+-evacuation-center/
+infrastructure-exposure-intelligence/
+smoke/
+weather/
+ground truth/
+
+# Root boilerplate files (the real app is in 'Recreate Dark Enterprise Dashboard' and 'backend')
+/.aistudio/
+/src/
+/public/
+/tests/
+/metadata.json
+/vite.config.ts
+/tsconfig.json
+/package.json
+/index.html
+Untitled-1.txt
+
+# Dependencies & Environments across all subfolders
+**/node_modules/
+**/.venv/
+**/venv/
+**/env/
+
+# Python cache & test artifacts
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build outputs
+**/dist/
+**/build/
+.dist/
+*.egg-info/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+
+# Keep the SQLite database with 2,819 NASA fire detections (only 1.1 MB)
+!backend/fire_intelligence.db

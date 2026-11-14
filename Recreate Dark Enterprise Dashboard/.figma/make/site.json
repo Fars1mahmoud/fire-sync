@@ -1,0 +1,11 @@
+{
+  "title": "FireGuard - Global Wildfire Monitoring & Prediction",
+  "description": "Delivers a detailed dark-themed enterprise dashboard displaying FireGuard wildfire monitoring data for real-time risk assessment and decision-making.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

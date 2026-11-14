@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: fire_intelligence_db
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-fire_intelligence}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-fire_intelligence}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - fire_net
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fire_intelligence_backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql+psycopg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-fire_intelligence}
+      - ENVIRONMENT=development
+      - LOG_LEVEL=INFO
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - ../brazil:/app/brazil:ro
+      - ../canada:/app/canada:ro
+    networks:
+      - fire_net
+
+volumes:
+  pgdata:
+    name: fire_intelligence_pgdata
+
+networks:
+  fire_net:
+    name: fire_intelligence_net
